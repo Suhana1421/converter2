@@ -1,0 +1,19 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Converter{
+    uint public constant GEWI_TO_WEI = 1e9;
+    event Received(address sender, uint amount);
+
+    receive() external payable{
+        emit Received(msg.sender, msg.value);
+    }
+
+    function getBalanceInWei() public view returns (uint){
+        return address(this).balance;
+    }
+
+    function getBalanceInGwei() public view returns (uint){
+        return address(this).balance/ GEWI_TO_WEI;
+    }
+}
